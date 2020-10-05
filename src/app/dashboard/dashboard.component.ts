@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-//import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs/Observable';
 
 import { DadosService } from './dados.service';
 
-declare var google: any;
+declare var googleGraficos: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -31,10 +32,10 @@ export class DashboardComponent implements OnInit {
    * @return void
    */
   init(): void {
-    if(typeof(google) !== 'undefined') {
-      google.charts.load('current', {'packages':['corechart']});
+    if(typeof(googleGraficos) !== 'undefined') {
+      googleGraficos.charts.load('current', {'packages':['corechart']});
       setTimeout(() => {
-      	google.charts.setOnLoadCallback(this.exibirGraficos());
+      	googleGraficos.charts.setOnLoadCallback(this.exibirGraficos());
       }, 1000);
     }
   }
@@ -61,7 +62,7 @@ export class DashboardComponent implements OnInit {
    */
   exibirPieChart(): void {
   	const el = document.getElementById('pie_chart');
-    const chart = new google.visualization.PieChart(el);
+    const chart = new googleGraficos.visualization.PieChart(el);
 
     chart.draw(this.obterDataTable(), this.obterOpcoes());
   }
@@ -73,7 +74,7 @@ export class DashboardComponent implements OnInit {
    */
   exibir3dPieChart(): void {
   	const el = document.getElementById('3d_pie_chart');
-  	const chart = new google.visualization.PieChart(el);
+  	const chart = new googleGraficos.visualization.PieChart(el);
 	const opcoes = this.obterOpcoes();
 
     opcoes['is3D'] = true;
@@ -87,7 +88,7 @@ export class DashboardComponent implements OnInit {
    */
   exibirDonutChart(): void {
   	const el = document.getElementById('donut_chart');
-  	const chart = new google.visualization.PieChart(el);
+  	const chart = new googleGraficos.visualization.PieChart(el);
     const opcoes = this.obterOpcoes();
 
     opcoes['pieHole'] = 0.4;
@@ -101,7 +102,7 @@ export class DashboardComponent implements OnInit {
    */
   exibirBarChart(): void {
   	const el = document.getElementById('bar_chart');
-    const chart = new google.visualization.BarChart(el);
+    const chart = new googleGraficos.visualization.BarChart(el);
 
     chart.draw(this.obterDataTable(), this.obterOpcoes());
   }
@@ -113,7 +114,7 @@ export class DashboardComponent implements OnInit {
    */
   exibirLineChart(): void {
   	const el = document.getElementById('line_chart');
-    const chart = new google.visualization.LineChart(el);
+    const chart = new googleGraficos.visualization.LineChart(el);
     
     chart.draw(this.obterDataTable(), this.obterOpcoes());
   }
@@ -125,7 +126,7 @@ export class DashboardComponent implements OnInit {
    */
   exibirColumnChart(): void {
   	const el = document.getElementById('column_chart');
-    const chart = new google.visualization.ColumnChart(el);
+    const chart = new googleGraficos.visualization.ColumnChart(el);
     
     chart.draw(this.obterDataTable(), this.obterOpcoes());
   }
@@ -137,7 +138,7 @@ export class DashboardComponent implements OnInit {
    * @return any
    */
   obterDataTable(): any {
-  	const data = new google.visualization.DataTable();
+  	const data = new googleGraficos.visualization.DataTable();
 
     data.addColumn('string', 'Mês');
     data.addColumn('number', 'Quantidade');
